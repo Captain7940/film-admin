@@ -8,6 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.User = void 0;
+const userModel_1 = __importDefault(require("./userModel"));
 const mongoose = require('mongoose');
 var uri = "mongodb+srv://admin:admin@cluster0.iypxbdh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 function main() {
@@ -22,3 +28,5 @@ main()
     .catch((err) => {
     console.log(err);
 });
+const User = mongoose.model('User', userModel_1.default);
+exports.User = User;

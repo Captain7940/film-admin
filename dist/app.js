@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const model_1 = require("./model");
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -20,6 +22,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.get('/', (request, response) => {
+    const userModel = new model_1.User({ name: 'admin', nickName: 'Admin' });
+    userModel.save();
     response.json({ success: true });
 });
 // catch 404 and forward to error handler

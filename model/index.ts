@@ -1,4 +1,4 @@
-
+import userSchema from './userModel';
 const mongoose = require('mongoose');
 var uri = "mongodb+srv://admin:admin@cluster0.iypxbdh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -13,3 +13,6 @@ main()
   .catch((err) => {
     console.log(err);
   });
+
+  const User = mongoose.model('User', userSchema);
+export { User };
