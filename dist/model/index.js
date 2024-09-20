@@ -12,7 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.User = void 0;
+exports.Film = exports.User = void 0;
+const filmModel_1 = __importDefault(require("./filmModel"));
 const userModel_1 = __importDefault(require("./userModel"));
 const mongoose = require('mongoose');
 var uri = "mongodb+srv://admin:admin@cluster0.iypxbdh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
@@ -30,3 +31,5 @@ main()
 });
 const User = mongoose.model('User', userModel_1.default);
 exports.User = User;
+const Film = mongoose.model('Film', filmModel_1.default);
+exports.Film = Film;

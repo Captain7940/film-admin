@@ -1,4 +1,6 @@
+import filmSchema from './filmModel';
 import userSchema from './userModel';
+
 const mongoose = require('mongoose');
 var uri = "mongodb+srv://admin:admin@cluster0.iypxbdh.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
@@ -15,4 +17,5 @@ main()
   });
 
   const User = mongoose.model('User', userSchema);
-export { User };
+  const Film = mongoose.model('Film', filmSchema);
+export { User, Film};
