@@ -1,6 +1,6 @@
-import { User } from "./model";
-import FilmRouter from './routes/film';
 import express, { Request, Response, NextFunction } from 'express';
+import FilmRouter from './routes/film';
+import usersRouter from "./routes/user";
 
 var createError = require('http-errors');
 var path = require('path');
@@ -25,6 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.use('/api/films', FilmRouter);
+
+app.use("/api/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req: Request, res: Response, next: NextFunction) {

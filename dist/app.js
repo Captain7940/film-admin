@@ -3,8 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const film_1 = __importDefault(require("./routes/film"));
 const express_1 = __importDefault(require("express"));
+const film_1 = __importDefault(require("./routes/film"));
+const user_1 = __importDefault(require("./routes/user"));
 var createError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -23,6 +24,7 @@ app.use(express_1.default.static(path.join(__dirname, 'public')));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.use('/api/films', film_1.default);
+app.use("/api/users", user_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

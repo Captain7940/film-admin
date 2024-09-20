@@ -16,39 +16,38 @@ const express_1 = __importDefault(require("express"));
 const model_1 = require("../model");
 const router = express_1.default.Router();
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { current = 1, pageSize = 20, name, author, category } = req.query;
-    const data = yield model_1.Film.find(Object.assign(Object.assign(Object.assign({}, (name && { name })), (author && { author })), (category && { category })))
+    const { current = 1, pageSize = 20, name, status } = req.query;
+    const data = yield model_1.User.find(Object.assign(Object.assign({}, (name && { name })), (status && { status })))
         .skip((Number(current) - 1) * Number(pageSize))
         .limit(Number(pageSize));
-    const total = yield model_1.Film.countDocuments(Object.assign(Object.assign(Object.assign({}, (name && { name })), (author && { author })), (category && { category })));
+    const total = yield model_1.User.countDocuments(Object.assign(Object.assign({}, (name && { name })), (status && { status })));
     return res.status(200).json({ data, total });
 }));
 router.post('/', (req, res) => {
     const body = req.body;
-    const filmModel = new model_1.Film(Object.assign({}, body));
-    filmModel.save();
+    const userModel = new model_1.User(Object.assign({}, body));
+    userModel.save();
     return res.json({ success: true });
 });
 router.delete('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    yield model_1.Film.findByIdAndDelete(id);
+    yield model_1.User.findByIdAndDelete(id);
     return res.status(200).json({ success: true });
 }));
-//Film edit
 router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const film = yield model_1.Film.findById(id);
-    if (film) {
-        res.status(200).json({ data: film, success: true });
+    const user = yield model_1.User.findById(id);
+    if (user) {
+        res.status(200).json({ data: user, success: true });
     }
     else {
-        res.status(500).json({ message: 'That film does not exist' });
+        res.status(500).json({ message: 'That user does not exist' });
     }
 }));
 router.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const body = req.body;
     const { id } = req.params;
-    yield model_1.Film.findOneAndUpdate({ _id: id }, body);
+    yield model_1.User.findOneAndUpdate({ _id: id }, body);
     return res.status(200).json({ success: true });
 }));
 exports.default = router;
