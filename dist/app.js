@@ -6,6 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const film_1 = __importDefault(require("./routes/film"));
 const user_1 = __importDefault(require("./routes/user"));
+const login_1 = __importDefault(require("./routes/login"));
+const express_jwt_1 = require("express-jwt");
+const constant_1 = require("./constant");
 var createError = require('http-errors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -21,10 +24,12 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express_1.default.static(path.join(__dirname, 'public')));
+app.use((0, express_jwt_1.expressjwt)({ secret: constant_1.SECRET_KEY, algorithms: ['HS256'] }).unless({ path: ['/login'] }));
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 app.use('/api/films', film_1.default);
 app.use("/api/users", user_1.default);
+app.use("/api/login", login_1.default);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));

@@ -50,4 +50,14 @@ router.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     yield model_1.User.findOneAndUpdate({ _id: id }, body);
     return res.status(200).json({ success: true });
 }));
+router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { name, password } = req.body;
+    const user = yield model_1.User.findOne({ name, password });
+    if (user) {
+        res.status(200).json({ data: user, success: true });
+    }
+    else {
+        res.status(500).json({ message: 'Wrong username or password' });
+    }
+}));
 exports.default = router;
