@@ -1,4 +1,4 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SECRET_KEY = void 0;
-exports.SECRET_KEY = 'thomas_123456';
+exports.SECRET_KEY = 'abc123';

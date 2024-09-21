@@ -48,13 +48,4 @@ router.delete('/:id', async (req: Request, res: Response) => {
     return res.status(200).json({ success: true });
   });
 
-  router.post('/login', async (req: Request, res: Response) => {
-    const { name, password } = req.body;
-    const user = await User.findOne({ name, password });
-    if(user) {
-      res.status(200).json({ data: user, success: true });
-    }else {
-      res.status(500).json({message: 'Wrong username or password'});
-    }
-  });
 export default router;
