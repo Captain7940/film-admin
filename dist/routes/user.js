@@ -14,8 +14,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const model_1 = require("../model");
-const constant_1 = require("../constant");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const router = express_1.default.Router();
 router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { current = 1, pageSize = 20, name, status } = req.query;
@@ -52,15 +50,14 @@ router.put('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     yield model_1.User.findOneAndUpdate({ _id: id }, body);
     return res.status(200).json({ success: true });
 }));
-router.post('login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, password } = req.body;
-    const user = yield model_1.User.finOne({ name, password });
-    if (user) {
-        const token = jsonwebtoken_1.default.sign({ id: user._id }, constant_1.SECRET_KEY, { expiresIn: "24h" });
-        res.status(200).json({ data: user, success: true, token });
-    }
-    else {
-        res.status(500).json({ message: 'Wrong username or password ' });
-    }
-}));
+// router.post('login', async (req: Request, res: Response) => {
+//   const {name, password} = req.body;
+//   const user = await User.finOne({ name, password });
+//   if(user) {
+//     const token = jwt.sign({id: user._id}, SECRET_KEY , {expiresIn: "24h"})
+//     res.status(200).json({ data: user, success: true, token});
+//   }else {
+//     res.status(500).json({ message: 'Wrong username or password '});
+//   }
+// });
 exports.default = router;

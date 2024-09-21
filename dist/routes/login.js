@@ -21,7 +21,7 @@ router.post('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, password } = req.body;
     const user = yield model_1.User.findOne({ name, password });
     if (user) {
-        const token = jsonwebtoken_1.default.sign({ id: user._id }, constant_1.SECRET_KEY, { expiresIn: "1h" });
+        const token = jsonwebtoken_1.default.sign({ id: user._id }, constant_1.SECRET_KEY, { expiresIn: "24h" });
         res.status(200).json({ data: user, success: true, token });
     }
     else {
